@@ -6,6 +6,8 @@ import {
   IconButton,
   InputAdornment,
   Typography,
+  Button,
+  FormControlLabel,
 } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -17,7 +19,7 @@ const FormFields = () => {
 
   return (
     <>
-      <Box>
+      <form>
         <TextField
           label="Username/Email"
           fullWidth
@@ -56,12 +58,31 @@ const FormFields = () => {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Checkbox {...label} defaultChecked color="default" size="small" />
+          <FormControlLabel
+            label="Remember Me"
+            control={
+              <Checkbox
+                {...label}
+                defaultChecked
+                color="default"
+                size="small"
+              />
+            }
+          />
+
           <Typography color="secondary.main" fontSize={13}>
             Forgot Password?
           </Typography>
         </Stack>
-      </Box>
+        <Box mt={5}>
+          <Button variant="contained" fullWidth color="primary" size="large">
+            Login
+          </Button>
+          <Typography textAlign="center" marginTop={5} fontSize={15}>
+            Don’t Have an account? Sign Up
+          </Typography>
+        </Box>
+      </form>
     </>
   );
 };
