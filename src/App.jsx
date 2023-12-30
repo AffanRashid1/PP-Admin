@@ -3,6 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import Login from "./screen/Login";
 import "./App.css";
 import ForgotPassword from "./screen/ForgotPassword";
+import Layout from "./components/custom/Layout";
 
 const App = () => {
   const theme = createTheme({
@@ -22,8 +23,7 @@ const App = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <ForgotPassword />
-        {/* <Login /> */}
+        <Layout />
       </ThemeProvider>
     </>
   );

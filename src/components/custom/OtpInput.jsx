@@ -7,8 +7,9 @@ const OtpInput = () => {
   const inputRefs = useRef([...Array(6)].map(() => React.createRef()));
 
   const handleChange = (index, value) => {
+    // Allow only one character
     const newOtpValues = [...otpValues];
-    newOtpValues[index] = value;
+    newOtpValues[index] = value[0] || ""; // Only take the first character
     setOtpValues(newOtpValues);
 
     if (index < 5 && value !== "") {
@@ -17,16 +18,24 @@ const OtpInput = () => {
   };
 
   const handlePaste = (event) => {
-    const pastedValue = event.clipboardData
-      .getData("text")
-      .slice(0, 6)
-      .split("");
+    event.preventDefault();
+
+    const pastedValue = event.clipboardData.getData("text").slice(0, 6);
     const newOtpValues = Array.from(
       { length: 6 },
       (_, index) => pastedValue[index] || ""
     );
     setOtpValues(newOtpValues);
-    inputRefs.current[5].current.focus();
+
+    // Find the index of the last non-empty value
+    const lastIndex = newOtpValues.lastIndexOf(
+      newOtpValues.find((val) => val !== "")
+    );
+
+    // Set focus to the input with the last non-empty value
+    if (lastIndex !== -1) {
+      inputRefs.current[lastIndex].current.focus();
+    }
   };
 
   const handleKeyDown = (index, event) => {
@@ -75,8 +84,6 @@ const OtpInput = () => {
                 },
               },
             }}
-            // Set maxLength to 1
-            inputProps={{ maxLength: 1 }}
           />
         ))}
       </form>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Layout from "../components/custom/Layout";
+import AuthLayout from "../components/custom/AuthLayout";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import { MuiOtpInput } from "mui-one-time-password-input";
@@ -9,7 +9,7 @@ const ForgotPassword = () => {
   const [otp, setOtp] = useState("");
   return (
     <>
-      <Layout>
+      <AuthLayout>
         <Typography fontWeight="bold" fontSize={22} mb={1} textAlign="center">
           Reset Your Password
         </Typography>
@@ -28,9 +28,8 @@ const ForgotPassword = () => {
             }}
           /> */}
 
-        <Stack alignItems="Center">
+        <Stack direction="row" justifyContent="">
           <OtpInput />
-          {/* <MuiOtpInput value={otp} onChange={(e) => setOtp(e)} length={5} /> */}
         </Stack>
         <Box mt={5}>
           <Button variant="contained" fullWidth color="primary" size="large">
@@ -40,7 +39,7 @@ const ForgotPassword = () => {
             Didn`t recieve the email ? Click to Resend
           </Typography>
         </Box>
-      </Layout>
+      </AuthLayout>
     </>
   );
 };

@@ -15,7 +15,9 @@ import Checkbox from "@mui/material/Checkbox";
 
 const FormFields = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const label = { inputProps: { "aria-label": "Checkbox demo" } };
+  const label = {
+    inputProps: { "aria-label": "Checkbox demo" },
+  };
 
   return (
     <>
@@ -59,7 +61,7 @@ const FormFields = () => {
           alignItems="center"
         >
           <FormControlLabel
-            label="Remember Me"
+            label={<Typography fontSize={13}>Remember Me</Typography>}
             control={
               <Checkbox
                 {...label}
