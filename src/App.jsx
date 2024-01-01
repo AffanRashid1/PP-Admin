@@ -24,6 +24,7 @@ const App = () => {
     <>
       <ThemeProvider theme={theme}>
         <ForgotPassword />
+        <Login />
       </ThemeProvider>
     </>
   );

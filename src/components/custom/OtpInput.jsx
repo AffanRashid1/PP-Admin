@@ -7,21 +7,24 @@ const OtpInput = ({ length, value, onChange }) => {
     value ? value.split("").slice(0, length) : Array(length).fill("")
   );
 
-  const inputRefs = useRef([...Array(length)].map(() => React.createRef()));
+  const inputRefs = useRef([...Array(length)]?.map(() => React.createRef()));
 
   const handleChange = (index, inputValue) => {
     const newOtpValues = [...otpValues];
+
     newOtpValues[index] = inputValue[0] || "";
+
     setOtpValues(newOtpValues);
 
     if (index < length - 1 && inputValue !== "") {
-      inputRefs.current[index + 1].current?.focus();
+      inputRefs.current[index + 1]?.current?.focus();
     }
 
     if (onChange) {
       onChange(newOtpValues?.join(""));
     }
   };
+
   const handlePaste = (event) => {
     event.preventDefault();
 
@@ -50,15 +53,23 @@ const OtpInput = ({ length, value, onChange }) => {
     const prev = index - 1;
     const next = index + 1;
 
+    const handleNavigation = (index) => {
+      const targetInputRef = inputRefs.current[index];
+      if (targetInputRef.current) {
+        targetInputRef.current.focus();
+        targetInputRef.current.select();
+      }
+    };
+
     if (event.key === "Backspace" && prev >= 0) {
-      inputRefs.current[prev].current?.focus();
+      handleNavigation(prev);
     } else if (event.key === "ArrowLeft" && prev >= 0) {
-      inputRefs.current[prev].current?.focus();
+      handleNavigation(prev);
     } else if (
       (event.key === "ArrowRight" || event.key === "Enter") &&
       next < length
     ) {
-      inputRefs.current[next].current?.focus();
+      handleNavigation(next);
     }
   };
 
@@ -68,7 +79,7 @@ const OtpInput = ({ length, value, onChange }) => {
 
   return (
     <Box>
-      {otpValues.map((value, index) => (
+      {otpValues?.map((value, index) => (
         <TextField
           key={index}
           name={`otp${index}`}
@@ -84,11 +95,11 @@ const OtpInput = ({ length, value, onChange }) => {
           inputRef={inputRefs.current[index]}
           onPaste={handlePaste}
           sx={{
-            width: "40px",
-            height: "40px",
+            input: { textAlign: "center", padding: "20px", fontSize: "25px" },
+            width: "60px",
+            height: "50px",
             textAlign: "center",
             margin: "0 10px",
-            fontSize: "20px",
             "& input[type=number]": {
               "&::-webkit-inner-spin-button, &::-webkit-outer-spin-button": {
                 WebkitAppearance: "none",
