@@ -1,40 +1,48 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 
-const OtpInput = () => {
-  const [otpValues, setOtpValues] = useState(["", "", "", "", "", ""]);
-  const inputRefs = useRef([...Array(6)].map(() => React.createRef()));
+const OtpInput = ({ length, value, onChange }) => {
+  const [otpValues, setOtpValues] = useState(
+    value ? value.split("").slice(0, length) : Array(length).fill("")
+  );
 
-  const handleChange = (index, value) => {
-    // Allow only one character
+  const inputRefs = useRef([...Array(length)].map(() => React.createRef()));
+
+  const handleChange = (index, inputValue) => {
     const newOtpValues = [...otpValues];
-    newOtpValues[index] = value[0] || ""; // Only take the first character
+    newOtpValues[index] = inputValue[0] || "";
     setOtpValues(newOtpValues);
 
-    if (index < 5 && value !== "") {
-      inputRefs.current[index + 1].current.focus();
+    if (index < length - 1 && inputValue !== "") {
+      inputRefs.current[index + 1].current?.focus();
+    }
+
+    if (onChange) {
+      onChange(newOtpValues?.join(""));
     }
   };
-
   const handlePaste = (event) => {
     event.preventDefault();
 
-    const pastedValue = event.clipboardData.getData("text").slice(0, 6);
-    const newOtpValues = Array.from(
-      { length: 6 },
-      (_, index) => pastedValue[index] || ""
-    );
-    setOtpValues(newOtpValues);
+    const pastedValue = event.clipboardData.getData("text").slice(0, length);
 
-    // Find the index of the last non-empty value
-    const lastIndex = newOtpValues.lastIndexOf(
-      newOtpValues.find((val) => val !== "")
-    );
+    if (!isNaN(pastedValue)) {
+      const newOtpValues = Array.from(
+        { length },
+        (_, index) => pastedValue[index] || ""
+      );
 
-    // Set focus to the input with the last non-empty value
-    if (lastIndex !== -1) {
-      inputRefs.current[lastIndex].current.focus();
+      setOtpValues(newOtpValues);
+
+      const lastIndex = newOtpValues.reduceRight(
+        (acc, val, index) => (val !== "" && acc === -1 ? index : acc),
+        -1
+      );
+
+      if (lastIndex !== -1) {
+        inputRefs.current[lastIndex].current.focus();
+      }
     }
   };
 
@@ -43,50 +51,53 @@ const OtpInput = () => {
     const next = index + 1;
 
     if (event.key === "Backspace" && prev >= 0) {
-      inputRefs.current[prev].current.focus();
+      inputRefs.current[prev].current?.focus();
     } else if (event.key === "ArrowLeft" && prev >= 0) {
-      inputRefs.current[prev].current.focus();
+      inputRefs.current[prev].current?.focus();
     } else if (
       (event.key === "ArrowRight" || event.key === "Enter") &&
-      next < 6
+      next < length
     ) {
-      inputRefs.current[next].current.focus();
+      inputRefs.current[next].current?.focus();
     }
   };
 
+  useEffect(() => {
+    inputRefs.current[0].current?.focus();
+  }, []);
+
   return (
     <Box>
-      <form onPaste={handlePaste}>
-        {otpValues.map((value, index) => (
-          <TextField
-            key={index}
-            name={`otp${index}`}
-            type="number"
-            autoComplete="off"
-            value={value}
-            onChange={(e) => handleChange(index, e.target.value)}
-            placeholder="-"
-            variant="outlined"
-            onKeyUp={(e) => handleKeyDown(index, e)}
-            size="small"
-            color="secondary"
-            inputRef={inputRefs.current[index]}
-            sx={{
-              width: "40px",
-              height: "40px",
-              textAlign: "center",
-              margin: "0 10px",
-              fontSize: "20px",
-              "& input[type=number]": {
-                "&::-webkit-inner-spin-button, &::-webkit-outer-spin-button": {
-                  "-webkit-appearance": "none",
-                  margin: 0,
-                },
+      {otpValues.map((value, index) => (
+        <TextField
+          key={index}
+          name={`otp${index}`}
+          type="number"
+          autoComplete="off"
+          value={value}
+          onChange={(e) => handleChange(index, e.target.value)}
+          placeholder="-"
+          variant="outlined"
+          onKeyUp={(e) => handleKeyDown(index, e)}
+          size="small"
+          color="secondary"
+          inputRef={inputRefs.current[index]}
+          onPaste={handlePaste}
+          sx={{
+            width: "40px",
+            height: "40px",
+            textAlign: "center",
+            margin: "0 10px",
+            fontSize: "20px",
+            "& input[type=number]": {
+              "&::-webkit-inner-spin-button, &::-webkit-outer-spin-button": {
+                WebkitAppearance: "none",
+                margin: 0,
               },
-            }}
-          />
-        ))}
-      </form>
+            },
+          }}
+        />
+      ))}
     </Box>
   );
 };
