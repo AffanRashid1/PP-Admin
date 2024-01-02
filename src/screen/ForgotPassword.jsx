@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import AuthLayout from "../components/custom/AuthLayout";
+import AuthLayout from "../components/custom/AuthLayout/AuthLayout";
 import { Box, Button, Stack, Typography } from "@mui/material";
-import OtpInput from "../components/custom/OtpInput";
+import OtpInput from "../components/custom/OtpInput/OtpInput";
 import { MuiOtpInput } from "mui-one-time-password-input";
 
 const ForgotPassword = () => {
@@ -25,7 +25,6 @@ const ForgotPassword = () => {
         </Typography>
 
         <form onSubmit={handleOtpSubmit}>
-          {/* <MuiOtpInput length={4} value={otp} onChange={handleOtpChange} /> */}
           <Stack direction="row" justifyContent="center" m="20px 0">
             <OtpInput length={5} value={otp} onChange={handleOtpChange} />
           </Stack>

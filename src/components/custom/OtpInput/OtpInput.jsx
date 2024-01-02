@@ -44,7 +44,7 @@ const OtpInput = ({ length, value, onChange }) => {
       );
 
       if (lastIndex !== -1) {
-        inputRefs.current[lastIndex].current.focus();
+        inputRefs.current[lastIndex + 1].current.focus();
       }
     }
   };
@@ -87,10 +87,10 @@ const OtpInput = ({ length, value, onChange }) => {
           autoComplete="off"
           value={value}
           onChange={(e) => handleChange(index, e.target.value)}
-          placeholder="-"
           variant="outlined"
           onKeyUp={(e) => handleKeyDown(index, e)}
           size="small"
+          inputProps={{ maxLength: 1 }}
           color="secondary"
           inputRef={inputRefs.current[index]}
           onPaste={handlePaste}
@@ -114,3 +114,13 @@ const OtpInput = ({ length, value, onChange }) => {
 };
 
 export default OtpInput;
+
+// if (
+//   index > 0 &&
+//   inputValue !== "" &&
+//   newOtpValues.slice(0, index).every((val) => val === "")
+// ) {
+//   newOtpValues[0] = newOtpValues[index];
+//   newOtpValues[index] = "";
+//   index = 0;
+// }

@@ -1,6 +1,6 @@
 import { Box, Button, Paper, Stack, Typography } from "@mui/material";
 import React from "react";
-import { logo } from "../../assets/asset";
+import { logo } from "../../../assets/asset";
 
 const AuthLayout = ({ children }) => {
   return (

@@ -1,7 +1,11 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import FormFields from "../components/Login/FormFields";
-import AuthLayout from "../components/custom/AuthLayout";
+import AuthLayout from "../components/custom/AuthLayout/AuthLayout";
+import FormControl from "../components/custom/FormControl/FormControl";
+import NumberInput from "../components/custom/NumberInput/NumberInput";
+import SubmitButton from "../components/custom/FormControl/SubmitButton";
+import EmailInput from "../components/custom/EmailInput/EmailInput";
 
 const Login = () => {
   return (
@@ -20,7 +24,13 @@ const Login = () => {
             Welcome User! Please enter your credentials to access your account.
           </Typography>
         </Box>
-        <FormFields />
+        {/* <FormFields /> */}
+
+        <FormControl>
+          <NumberInput />
+          <EmailInput />
+          <SubmitButton text="Submit" />
+        </FormControl>
       </AuthLayout>
     </>
   );
