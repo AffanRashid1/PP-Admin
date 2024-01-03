@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CustomModal from "../components/custom/Modal/CustomModal";
 import { TextField } from "@mui/material";
 
-const ShedularModal = ({ open, setOpen }) => {
+const SchedulerModal = ({ open, setOpen }) => {
   const [file, setFile] = useState({
     image: null,
     imagePreview: null,
@@ -34,4 +34,4 @@ const ShedularModal = ({ open, setOpen }) => {
   );
 };
 
-export default ShedularModal;
+export default SchedulerModal;

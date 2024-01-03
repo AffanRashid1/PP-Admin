@@ -6,8 +6,8 @@ import ForgotPassword from "./screen/ForgotPassword";
 import Layout from "./components/custom/Layout/Layout";
 import FormControl from "./components/custom/FormControl/FormControl";
 import NumberInput from "./components/custom/NumberInput/NumberInput";
-import ShedularModal from "./screen/ShedularModal";
 import InvoiceDetail from "./screen/InvoiceDetail";
+import SchedulerModal from "./screen/SchedularModal";
 
 const App = () => {
   const [open, setOpen] = useState(false);
@@ -29,11 +29,12 @@ const App = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Button variant="contained" onClick={() => setOpen(true)}>
+        {/* <Button variant="contained" onClick={() => setOpen(true)}>
           Open Modal
-        </Button>
+        </Button> */}
         {/* <InvoiceDetail open={open} setOpen={() => setOpen(false)} /> */}
-        <ShedularModal open={open} setOpen={() => setOpen(false)} />
+        {/* <SchedulerModal open={open} setOpen={() => setOpen(false)} /> */}
+        <ForgotPassword />
       </ThemeProvider>
     </>
   );

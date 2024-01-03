@@ -6,17 +6,25 @@ const OtpInput = ({ length, value, onChange }) => {
   const [otpValues, setOtpValues] = useState(
     value ? value.split("").slice(0, length) : Array(length).fill("")
   );
+  const [index, setIndex] = useState(null);
 
   const inputRefs = useRef([...Array(length)]?.map(() => React.createRef()));
 
   const handleChange = (index, inputValue) => {
+    setIndex(index);
     const newOtpValues = [...otpValues];
 
-    newOtpValues[index] = inputValue[0] || "";
+    const isValidInput =
+      inputValue.length === 1 &&
+      inputValue.charCodeAt(0) >= 48 &&
+      inputValue.charCodeAt(0) <= 57;
+
+    newOtpValues[index] = isValidInput ? inputValue : "";
 
     setOtpValues(newOtpValues);
 
-    if (index < length - 1 && inputValue !== "") {
+    if (index < length - 1 && isValidInput) {
+      inputRefs.current[index + 1]?.current?.removeAttribute("disabled");
       inputRefs.current[index + 1]?.current?.focus();
     }
 
@@ -24,6 +32,27 @@ const OtpInput = ({ length, value, onChange }) => {
       onChange(newOtpValues?.join(""));
     }
   };
+
+  // const handleChange = (index, inputValue) => {
+  //   const newOtpValues = [...otpValues];
+
+  //   const isValidInput =
+  //     inputValue.length === 1 &&
+  //     inputValue.charCodeAt(0) >= 48 &&
+  //     inputValue.charCodeAt(0) <= 57;
+
+  //   newOtpValues[index] = isValidInput ? inputValue : "";
+
+  //   setOtpValues(newOtpValues);
+
+  //   if (index < length - 1 && isValidInput) {
+  //     inputRefs.current[index + 1]?.current?.focus();
+  //   }
+
+  //   if (onChange) {
+  //     onChange(newOtpValues?.join(""));
+  //   }
+  // };
 
   const handlePaste = (event) => {
     event.preventDefault();
@@ -38,13 +67,17 @@ const OtpInput = ({ length, value, onChange }) => {
 
       setOtpValues(newOtpValues);
 
-      const lastIndex = newOtpValues.reduceRight(
-        (acc, val, index) => (val !== "" && acc === -1 ? index : acc),
-        -1
-      );
+      let lastIndex = -1;
+
+      for (let index = newOtpValues.length - 1; index >= 0; index--) {
+        if (newOtpValues[index] !== "") {
+          lastIndex = index;
+          break;
+        }
+      }
 
       if (lastIndex !== -1) {
-        inputRefs.current[lastIndex + 1].current.focus();
+        return inputRefs.current[lastIndex + 1]?.current.focus();
       }
     }
   };
@@ -55,6 +88,7 @@ const OtpInput = ({ length, value, onChange }) => {
 
     const handleNavigation = (index) => {
       const targetInputRef = inputRefs.current[index];
+
       if (targetInputRef.current) {
         targetInputRef.current.focus();
         targetInputRef.current.select();
@@ -63,6 +97,7 @@ const OtpInput = ({ length, value, onChange }) => {
 
     if (event.key === "Backspace" && prev >= 0) {
       handleNavigation(prev);
+      inputRefs.current[index]?.current?.setAttribute("disabled", "true");
     } else if (event.key === "ArrowLeft" && prev >= 0) {
       handleNavigation(prev);
     } else if (
@@ -75,6 +110,10 @@ const OtpInput = ({ length, value, onChange }) => {
 
   useEffect(() => {
     inputRefs.current[0].current?.focus();
+
+    for (let i = index + 1; i < length; i++) {
+      inputRefs.current[i]?.current?.setAttribute("disabled", "true");
+    }
   }, []);
 
   return (
@@ -83,7 +122,6 @@ const OtpInput = ({ length, value, onChange }) => {
         <TextField
           key={index}
           name={`otp${index}`}
-          type="number"
           autoComplete="off"
           value={value}
           onChange={(e) => handleChange(index, e.target.value)}
@@ -114,13 +152,3 @@ const OtpInput = ({ length, value, onChange }) => {
 };
 
 export default OtpInput;
-
-// if (
-//   index > 0 &&
-//   inputValue !== "" &&
-//   newOtpValues.slice(0, index).every((val) => val === "")
-// ) {
-//   newOtpValues[0] = newOtpValues[index];
-//   newOtpValues[index] = "";
-//   index = 0;
-// }

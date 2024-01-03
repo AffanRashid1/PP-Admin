@@ -1,10 +1,17 @@
 import React from "react";
 import Modal from "@mui/material/Modal";
-import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
+import {
+  Avatar,
+  Badge,
+  Box,
+  Button,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
 import UploadIcon from "@mui/icons-material/Upload";
-import ImagePreview from "../ImagePreview/ImagePreview";
 
 const CustomModal = ({
   onClose,
@@ -62,6 +69,7 @@ const CustomModal = ({
     whiteSpace: "nowrap",
     width: 1,
   });
+
   return (
     <>
       <Modal
@@ -99,7 +107,19 @@ const CustomModal = ({
                   Technician Photo
                 </Typography>
                 <Stack direction="row" gap={2}>
-                  <ImagePreview src={src} onClick={ClosePreview} />
+                  <Box>
+                    {src ? (
+                      <Badge
+                        badgeContent={
+                          <CloseIcon fontSize="10px" onClick={ClosePreview} />
+                        }
+                      >
+                        <Avatar src={src} variant="rounded" />
+                      </Badge>
+                    ) : (
+                      <Avatar variant="rounded" />
+                    )}
+                  </Box>
                   <Button
                     component="label"
                     variant="contained"

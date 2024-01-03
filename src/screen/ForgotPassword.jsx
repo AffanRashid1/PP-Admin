@@ -23,10 +23,9 @@ const ForgotPassword = () => {
         <Typography fontWeight="bold" fontSize={22} mb={1} textAlign="center">
           Confirm Your OTP
         </Typography>
-
         <form onSubmit={handleOtpSubmit}>
           <Stack direction="row" justifyContent="center" m="20px 0">
-            <OtpInput length={5} value={otp} onChange={handleOtpChange} />
+            <OtpInput length={4} value={otp} onChange={handleOtpChange} />
           </Stack>
           <Box mt={5}>
             <Button
