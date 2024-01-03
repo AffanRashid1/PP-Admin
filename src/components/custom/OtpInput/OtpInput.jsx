@@ -33,31 +33,14 @@ const OtpInput = ({ length, value, onChange }) => {
     }
   };
 
-  // const handleChange = (index, inputValue) => {
-  //   const newOtpValues = [...otpValues];
-
-  //   const isValidInput =
-  //     inputValue.length === 1 &&
-  //     inputValue.charCodeAt(0) >= 48 &&
-  //     inputValue.charCodeAt(0) <= 57;
-
-  //   newOtpValues[index] = isValidInput ? inputValue : "";
-
-  //   setOtpValues(newOtpValues);
-
-  //   if (index < length - 1 && isValidInput) {
-  //     inputRefs.current[index + 1]?.current?.focus();
-  //   }
-
-  //   if (onChange) {
-  //     onChange(newOtpValues?.join(""));
-  //   }
-  // };
-
   const handlePaste = (event) => {
     event.preventDefault();
 
     const pastedValue = event.clipboardData.getData("text").slice(0, length);
+
+    for (let i = index + 1; i < length; i++) {
+      inputRefs.current[i]?.current?.removeAttribute("disabled");
+    }
 
     if (!isNaN(pastedValue)) {
       const newOtpValues = Array.from(
@@ -77,7 +60,7 @@ const OtpInput = ({ length, value, onChange }) => {
       }
 
       if (lastIndex !== -1) {
-        return inputRefs.current[lastIndex + 1]?.current.focus();
+        inputRefs.current[lastIndex + 1]?.current.focus();
       }
     }
   };
@@ -128,7 +111,7 @@ const OtpInput = ({ length, value, onChange }) => {
           variant="outlined"
           onKeyUp={(e) => handleKeyDown(index, e)}
           size="small"
-          inputProps={{ maxLength: 1 }}
+          // inputProps={{ maxLength: 1 }}
           color="secondary"
           inputRef={inputRefs.current[index]}
           onPaste={handlePaste}
