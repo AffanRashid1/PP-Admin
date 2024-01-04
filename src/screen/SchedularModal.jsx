@@ -27,11 +27,6 @@ const SchedulerModal = ({ open, setOpen }) => {
         imageText="Product Logo"
       >
         <TextField label="Phone Number" color="secondary" />
-        <TextField label="Phone Number" color="secondary" />
-        <TextField label="Phone Number" color="secondary" />
-        <TextField label="Phone Number" color="secondary" />
-        <TextField label="Phone Number" color="secondary" />
-        <TextField label="Phone Number" color="secondary" />
       </ModalWrapper>
       {/* <CustomModal
         open={open}
