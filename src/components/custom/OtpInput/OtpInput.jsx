@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import { Stack } from "@mui/material";
 
 const OtpInput = ({ length, value, onChange }) => {
   const [otpValues, setOtpValues] = useState(
@@ -91,6 +92,23 @@ const OtpInput = ({ length, value, onChange }) => {
     }
   };
 
+  // const handleClick = (index) => {
+  //   let targetIndex = index;
+  //   for (let i = length - 1; i >= 0; i--) {
+  //     if (!inputRefs.current[i]?.current?.hasAttribute("disabled")) {
+  //       targetIndex = i;
+  //       break;
+  //     }
+  //   }
+
+  //   const targetInputRef = inputRefs.current[targetIndex];
+
+  //   if (targetInputRef.current) {
+  //     targetInputRef.current.focus();
+  //     targetInputRef.current.select();
+  //   }
+  // };
+
   useEffect(() => {
     inputRefs.current[0].current?.focus();
 
@@ -100,37 +118,44 @@ const OtpInput = ({ length, value, onChange }) => {
   }, []);
 
   return (
-    <Box>
-      {otpValues?.map((value, index) => (
-        <TextField
-          key={index}
-          name={`otp${index}`}
-          autoComplete="off"
-          value={value}
-          onChange={(e) => handleChange(index, e.target.value)}
-          variant="outlined"
-          onKeyUp={(e) => handleKeyDown(index, e)}
-          size="small"
-          // inputProps={{ maxLength: 1 }}
-          color="secondary"
-          inputRef={inputRefs.current[index]}
-          onPaste={handlePaste}
-          sx={{
-            input: { textAlign: "center", padding: "20px", fontSize: "25px" },
-            width: "60px",
-            height: "50px",
-            textAlign: "center",
-            margin: "0 10px",
-            "& input[type=number]": {
-              "&::-webkit-inner-spin-button, &::-webkit-outer-spin-button": {
-                WebkitAppearance: "none",
-                margin: 0,
+    <Stack
+      // onClick={() => handleClick(index)}
+      direction="row"
+      justifyContent="center"
+      height="100px"
+      alignItems="center"
+    >
+      <Box>
+        {otpValues?.map((value, index) => (
+          <TextField
+            key={index}
+            name={`otp${index}`}
+            autoComplete="off"
+            value={value}
+            onChange={(e) => handleChange(index, e.target.value)}
+            variant="outlined"
+            onKeyUp={(e) => handleKeyDown(index, e)}
+            size="small"
+            color="secondary"
+            inputRef={inputRefs.current[index]}
+            onPaste={handlePaste}
+            sx={{
+              input: { textAlign: "center", padding: "20px", fontSize: "25px" },
+              width: "60px",
+              height: "100%",
+              textAlign: "center",
+              margin: "0 10px",
+              "& input[type=number]": {
+                "&::-webkit-inner-spin-button, &::-webkit-outer-spin-button": {
+                  WebkitAppearance: "none",
+                  margin: 0,
+                },
               },
-            },
-          }}
-        />
-      ))}
-    </Box>
+            }}
+          />
+        ))}
+      </Box>
+    </Stack>
   );
 };
 

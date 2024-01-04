@@ -29,12 +29,13 @@ const App = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
+        <Login />
         {/* <Button variant="contained" onClick={() => setOpen(true)}>
           Open Modal
         </Button> */}
         {/* <InvoiceDetail open={open} setOpen={() => setOpen(false)} /> */}
         {/* <SchedulerModal open={open} setOpen={() => setOpen(false)} /> */}
-        <ForgotPassword />
+        {/* <ForgotPassword /> */}
       </ThemeProvider>
     </>
   );

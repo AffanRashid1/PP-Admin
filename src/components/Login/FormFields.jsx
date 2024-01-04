@@ -55,33 +55,23 @@ const FormFields = () => {
             ),
           }}
         />
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <FormControlLabel
-            label={<Typography fontSize={13}>Remember Me</Typography>}
-            control={
-              <Checkbox
-                {...label}
-                defaultChecked
-                color="default"
-                size="small"
-              />
-            }
-          />
-
-          <Typography color="secondary.main" fontSize={13}>
-            Forgot Password?
-          </Typography>
-        </Stack>
+        <Typography color="primary" fontSize={13} textAlign="right">
+          Forgot Password?
+        </Typography>
         <Box mt={5}>
           <Button variant="contained" fullWidth color="primary" size="large">
             Login
           </Button>
-          <Typography textAlign="center" marginTop={5} fontSize={15}>
-            Don’t Have an account? Sign Up
+          <Typography
+            textAlign="center"
+            marginTop={5}
+            fontSize={15}
+            components={{ root: "span" }}
+          >
+            Don’t Have an account? &nbsp;
+            <Typography component="span" style={{ color: "red" }}>
+              Sign Up
+            </Typography>
           </Typography>
         </Box>
       </form>

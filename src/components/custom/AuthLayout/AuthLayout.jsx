@@ -5,9 +5,10 @@ import { logo } from "../../../assets/asset";
 const AuthLayout = ({ children }) => {
   return (
     <Stack
-      sx={{ height: "100vh", bgcolor: "primary.main" }}
+      sx={{ minHeight: "100vh", bgcolor: "primary.main" }}
       justifyContent="center"
       alignItems="center"
+      padding=" 30px 0"
     >
       <Paper
         sx={{

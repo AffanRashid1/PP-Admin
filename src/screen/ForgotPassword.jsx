@@ -13,8 +13,6 @@ const ForgotPassword = () => {
 
   const handleOtpSubmit = (e) => {
     e.preventDefault();
-
-    console.log("Otp is" + " " + otp);
   };
 
   return (
@@ -24,10 +22,9 @@ const ForgotPassword = () => {
           Confirm Your OTP
         </Typography>
         <form onSubmit={handleOtpSubmit}>
-          <Stack direction="row" justifyContent="center" m="20px 0">
-            <OtpInput length={4} value={otp} onChange={handleOtpChange} />
-          </Stack>
-          <Box mt={5}>
+          <OtpInput length={4} value={otp} onChange={handleOtpChange} />
+
+          <Box mt={10}>
             <Button
               variant="contained"
               fullWidth
@@ -37,11 +34,11 @@ const ForgotPassword = () => {
             >
               Verify OTP
             </Button>
-            <Typography textAlign="center" marginTop={5} fontSize={15}>
-              Didn`t recieve the email ? Click to Resend
-            </Typography>
           </Box>
         </form>
+        <Typography textAlign="center" marginTop={1} fontSize={15}>
+          Didn`t receive the email ? Click to Resend
+        </Typography>
       </AuthLayout>
     </>
   );

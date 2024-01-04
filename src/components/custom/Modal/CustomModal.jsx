@@ -36,12 +36,13 @@ const CustomModal = ({
     borderRadius: "8px",
     pt: 2,
     px: 4,
-    pb: 3,
     outline: "none",
+    maxHeight: "80%",
+    overflow: "hidden",
   };
 
   const stackStyle = {
-    maxHeight: 600,
+    maxHeight: "500px",
     overflowY: "scroll",
     m: "20px 0",
     p: "5px 0",
@@ -81,9 +82,9 @@ const CustomModal = ({
         disableAutoFocus
       >
         <Box sx={style}>
-          <Box mb={5}>
+          <Box mb={5} sx={{ position: "sticky", top: 0 }}>
             <IconButton
-              sx={{ position: "absolute", top: 20, left: 20 }}
+              sx={{ position: "absolute", top: -5, left: -20 }}
               onClick={onClose}
             >
               <CloseIcon />
@@ -134,15 +135,25 @@ const CustomModal = ({
               </Box>
             )}
           </Stack>
-          <Button
-            fullWidth
-            variant="contained"
-            onClick={onClick}
-            sx={{ mt: "10px" }}
-            size="large"
+          <Box
+            sx={{
+              width: "100%",
+              bgcolor: "white",
+              padding: "20px 0",
+              position: "sticky",
+              bottom: 0,
+              zIndex: 2,
+            }}
           >
-            {btnText}
-          </Button>
+            <Button
+              fullWidth
+              variant="contained"
+              onClick={onClick}
+              size="large"
+            >
+              {btnText}
+            </Button>
+          </Box>
         </Box>
       </Modal>
     </>

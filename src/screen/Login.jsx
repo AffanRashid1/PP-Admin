@@ -24,13 +24,7 @@ const Login = () => {
             Welcome User! Please enter your credentials to access your account.
           </Typography>
         </Box>
-        {/* <FormFields /> */}
-
-        <FormControl>
-          <NumberInput />
-          <EmailInput />
-          <SubmitButton text="Submit" />
-        </FormControl>
+        <FormFields />
       </AuthLayout>
     </>
   );

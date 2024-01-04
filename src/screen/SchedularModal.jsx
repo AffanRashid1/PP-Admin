@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CustomModal from "../components/custom/Modal/CustomModal";
-import { TextField } from "@mui/material";
+import { Stack, TextField } from "@mui/material";
+import ModalWrapper from "../components/custom/ModalMui/ModalMui";
 
 const SchedulerModal = ({ open, setOpen }) => {
   const [file, setFile] = useState({
@@ -10,7 +11,29 @@ const SchedulerModal = ({ open, setOpen }) => {
 
   return (
     <>
-      <CustomModal
+      <ModalWrapper
+        open={open}
+        onClose={setOpen}
+        title="Add Scheduler Details"
+        image
+        UploadChange={(e) => {
+          setFile({
+            image: e.target.files[0],
+            imagePreview: URL.createObjectURL(e.target.files[0]),
+          });
+        }}
+        ClosePreview={() => setFile(null)}
+        src={file?.imagePreview}
+        imageText="Product Logo"
+      >
+        <TextField label="Phone Number" color="secondary" />
+        <TextField label="Phone Number" color="secondary" />
+        <TextField label="Phone Number" color="secondary" />
+        <TextField label="Phone Number" color="secondary" />
+        <TextField label="Phone Number" color="secondary" />
+        <TextField label="Phone Number" color="secondary" />
+      </ModalWrapper>
+      {/* <CustomModal
         open={open}
         onClose={() => setOpen(false)}
         title="Add Scheduler Details"
@@ -29,7 +52,12 @@ const SchedulerModal = ({ open, setOpen }) => {
         <TextField label="Email" color="secondary" />
         <TextField label="Password" color="secondary" />
         <TextField label="Phone Number" color="secondary" />
-      </CustomModal>
+        <TextField label="Phone Number" color="secondary" />
+        <TextField label="Phone Number" color="secondary" />
+        <TextField label="Phone Number" color="secondary" />
+        <TextField label="Phone Number" color="secondary" />
+        <TextField label="Phone Number" color="secondary" />
+      </CustomModal> */}
     </>
   );
 };
