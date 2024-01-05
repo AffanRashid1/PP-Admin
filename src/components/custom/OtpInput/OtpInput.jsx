@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import { Stack } from "@mui/material";
+import { Input, Stack } from "@mui/material";
 
 const OtpInput = ({ length, value, onChange }) => {
   const [otpValues, setOtpValues] = useState(
@@ -123,10 +123,11 @@ const OtpInput = ({ length, value, onChange }) => {
       direction="row"
       justifyContent="center"
       alignItems="center"
+      pt={5}
     >
-      <Box>
+      <Stack direction="row">
         {otpValues?.map((value, index) => (
-          <TextField
+          <Input
             key={index}
             name={`otp${index}`}
             autoComplete="off"
@@ -140,8 +141,9 @@ const OtpInput = ({ length, value, onChange }) => {
             onPaste={handlePaste}
             sx={{
               input: { textAlign: "center", fontSize: "25px" },
-              width: "50px",
-              height: "50px",
+              // width: { lg: "50px", md: "30px", xs: "35px" },
+              // height: "0px",
+              // border: 1,
               textAlign: "center",
               margin: "0 10px",
               "& input[type=number]": {
@@ -152,8 +154,34 @@ const OtpInput = ({ length, value, onChange }) => {
               },
             }}
           />
+          // <TextField
+          //   key={index}
+          //   name={`otp${index}`}
+          //   autoComplete="off"
+          //   value={value}
+          //   onChange={(e) => handleChange(index, e.target.value)}
+          //   variant="outlined"
+          //   onKeyUp={(e) => handleKeyDown(index, e)}
+          //   size="small"
+          //   color="secondary"
+          //   inputRef={inputRefs.current[index]}
+          //   onPaste={handlePaste}
+          //   sx={{
+          //     input: { textAlign: "center", fontSize: "25px" },
+          //     width: { lg: "50px", md: "30px", xs: "35px" },
+          //     // height: "0px",
+          //     textAlign: "center",
+          //     margin: "0 10px",
+          //     "& input[type=number]": {
+          //       "&::-webkit-inner-spin-button, &::-webkit-outer-spin-button": {
+          //         WebkitAppearance: "none",
+          //         margin: 0,
+          //       },
+          //     },
+          //   }}
+          // />
         ))}
-      </Box>
+      </Stack>
     </Stack>
   );
 };

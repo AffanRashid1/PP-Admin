@@ -12,17 +12,17 @@ const AuthLayout = ({ children }) => {
     >
       <Paper
         sx={{
-          width: { lg: "520px", md: "520px", sm: "80%", xs: "90%" },
+          width: { lg: "520px", md: "520px", sm: "60%", xs: "90%" },
           p: "40px 26px",
           borderRadius: "8px",
         }}
       >
         <Stack
           sx={{
-            gap: { lg: 3, sm: 4 },
+            gap: { lg: 3, sm: 4, xs: 4 },
           }}
         >
-          <Stack alignItems="center">
+          <Stack alignItems="center" width={{}}>
             <img src={logo} alt="logo" />
           </Stack>
           {children}
