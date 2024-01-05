@@ -139,7 +139,7 @@ const OtpInput = ({ length, value, onChange }) => {
             inputRef={inputRefs.current[index]}
             onPaste={handlePaste}
             sx={{
-              input: { textAlign: "center", padding: "20px", fontSize: "25px" },
+              input: { textAlign: "center", fontSize: "25px" },
               width: "50px",
               height: "50px",
               textAlign: "center",
