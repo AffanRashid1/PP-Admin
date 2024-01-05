@@ -19,7 +19,7 @@ const AuthLayout = ({ children }) => {
       >
         <Stack
           sx={{
-            gap: { lg: 6, sm: 4 },
+            gap: { lg: 3, sm: 4 },
           }}
         >
           <Stack alignItems="center">

@@ -12,12 +12,10 @@ import {
 import PersonIcon from "@mui/icons-material/Person";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Checkbox from "@mui/material/Checkbox";
+import { Link } from "react-router-dom";
 
 const FormFields = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const label = {
-    inputProps: { "aria-label": "Checkbox demo" },
-  };
 
   return (
     <>
@@ -55,25 +53,17 @@ const FormFields = () => {
             ),
           }}
         />
-        <Typography color="primary" fontSize={13} textAlign="right">
-          Forgot Password?
-        </Typography>
-        <Box mt={5}>
+        <Stack mt={5} direction="column" gap={2}>
           <Button variant="contained" fullWidth color="primary" size="large">
             Login
           </Button>
-          <Typography
-            textAlign="center"
-            marginTop={5}
-            fontSize={15}
-            components={{ root: "span" }}
-          >
-            Don’t Have an account? &nbsp;
-            <Typography component="span" style={{ color: "red" }}>
-              Sign Up
-            </Typography>
-          </Typography>
-        </Box>
+
+          <Link to="/forgot-password" style={{ textDecoration: "none" }}>
+            <Button fullWidth color="primary">
+              Forgot Password?
+            </Button>
+          </Link>
+        </Stack>
       </form>
     </>
   );

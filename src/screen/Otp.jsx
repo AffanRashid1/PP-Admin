@@ -4,7 +4,7 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import OtpInput from "../components/custom/OtpInput/OtpInput";
 import { MuiOtpInput } from "mui-one-time-password-input";
 
-const ForgotPassword = () => {
+const Otp = () => {
   const [otp, setOtp] = useState("");
 
   const handleOtpChange = (newOtpValue) => {
@@ -22,7 +22,7 @@ const ForgotPassword = () => {
           Confirm Your OTP
         </Typography>
         <form onSubmit={handleOtpSubmit}>
-          <OtpInput length={4} value={otp} onChange={handleOtpChange} />
+          <OtpInput length={6} value={otp} onChange={handleOtpChange} />
 
           <Box mt={10}>
             <Button
@@ -44,4 +44,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default Otp;

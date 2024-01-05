@@ -43,7 +43,15 @@ const ModalWrapper = ({
   function BootstrapDialogTitle(props) {
     const { children, ...other } = props;
     return (
-      <DialogTitle sx={{ textAlign: "center" }} {...other}>
+      <DialogTitle
+        sx={{
+          textAlign: "center",
+          padding: "10px 0",
+          position: "sticky",
+          top: 0,
+        }}
+        {...other}
+      >
         {children}
         <IconButton
           aria-label="close"
@@ -68,7 +76,8 @@ const ModalWrapper = ({
       {...props}
     >
       <BootstrapDialogTitle onClose={onClose}>{title}</BootstrapDialogTitle>
-      <DialogContent sx={{ dialogContentSx }}>
+
+      <DialogContent sx={{ dialogContentSx }} dividers>
         <Stack direction="column" gap={4}>
           {children}
         </Stack>
@@ -108,9 +117,8 @@ const ModalWrapper = ({
       </DialogContent>
       <Box
         sx={{
-          width: "100%",
           bgcolor: "white",
-          padding: "20px",
+          padding: "10px 20px",
           position: "sticky",
           bottom: 0,
           zIndex: 2,

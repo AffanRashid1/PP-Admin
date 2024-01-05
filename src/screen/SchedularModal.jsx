@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import CustomModal from "../components/custom/Modal/CustomModal";
-import { Stack, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import ModalWrapper from "../components/custom/ModalMui/ModalMui";
 
-const SchedulerModal = ({ open, setOpen }) => {
+const SchedulerModal = () => {
   const [file, setFile] = useState({
     image: null,
     imagePreview: null,
   });
+  const [open, setOpen] = useState(false);
 
   return (
     <>
+      <button onClick={() => setOpen(true)}>Show modal</button>
+
       <ModalWrapper
         open={open}
-        onClose={setOpen}
+        onClose={() => setOpen(false)}
         title="Add Scheduler Details"
         image
         UploadChange={(e) => {
@@ -26,6 +29,7 @@ const SchedulerModal = ({ open, setOpen }) => {
         src={file?.imagePreview}
         imageText="Product Logo"
       >
+        <TextField label="Phone Number" color="secondary" />
         <TextField label="Phone Number" color="secondary" />
       </ModalWrapper>
       {/* <CustomModal

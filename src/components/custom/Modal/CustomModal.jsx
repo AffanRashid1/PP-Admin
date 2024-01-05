@@ -137,7 +137,6 @@ const CustomModal = ({
           </Stack>
           <Box
             sx={{
-              width: "100%",
               bgcolor: "white",
               padding: "20px 0",
               position: "sticky",

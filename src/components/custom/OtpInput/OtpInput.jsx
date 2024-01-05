@@ -122,7 +122,6 @@ const OtpInput = ({ length, value, onChange }) => {
       // onClick={() => handleClick(index)}
       direction="row"
       justifyContent="center"
-      height="100px"
       alignItems="center"
     >
       <Box>
@@ -141,8 +140,8 @@ const OtpInput = ({ length, value, onChange }) => {
             onPaste={handlePaste}
             sx={{
               input: { textAlign: "center", padding: "20px", fontSize: "25px" },
-              width: "60px",
-              height: "100%",
+              width: "50px",
+              height: "50px",
               textAlign: "center",
               margin: "0 10px",
               "& input[type=number]": {

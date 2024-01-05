@@ -1,5 +1,8 @@
-import ForgotPassword from "./screen/ForgotPassword";
+import Otp from "./screen/Otp";
 import Login from "./screen/Login";
+import ResetPass from "./screen/ResetPass";
+import SchedularModal from "./screen/SchedularModal";
+import ForgotPass from "./screen/ForgotPass";
 
 const routes = [
   {
@@ -8,7 +11,19 @@ const routes = [
   },
   {
     path: "/forgot-password",
-    element: <ForgotPassword />,
+    element: <ForgotPass />,
+  },
+  {
+    path: "/schedular",
+    element: <SchedularModal />,
+  },
+  {
+    path: "/reset",
+    element: <ResetPass />,
+  },
+  {
+    path: "/Otp",
+    element: <Otp />,
   },
 ];
 
