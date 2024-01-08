@@ -1,8 +1,5 @@
 import React from "react";
 import {
-  Avatar,
-  Badge,
-  Box,
   Button,
   Dialog,
   DialogActions,
@@ -14,7 +11,7 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useMediaQuery } from "@mui/material";
-import FilePicker from "../../../FilePicker/FilePicker";
+import FilePicker from "../../FilePicker/FilePicker";
 
 const ModalWrapper = ({
   open,
@@ -27,7 +24,6 @@ const ModalWrapper = ({
   UploadChange,
   imageText,
   btnText,
-
   ...props
 }) => {
   const isSmallScreen = useMediaQuery("(max-width: 600px)");
@@ -73,6 +69,7 @@ const ModalWrapper = ({
       </DialogTitle>
     );
   }
+
   return (
     <Dialog
       open={open}

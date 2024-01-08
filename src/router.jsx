@@ -3,6 +3,7 @@ import Login from "./screen/Login";
 import ResetPass from "./screen/ResetPass";
 import SchedularModal from "./screen/SchedularModal";
 import ForgotPass from "./screen/ForgotPass";
+import Profile from "./components/Profile/Profile";
 
 const routes = [
   {
@@ -24,6 +25,10 @@ const routes = [
   {
     path: "/Otp",
     element: <Otp />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
   },
 ];
 
