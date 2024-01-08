@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   Dialog,
+  DialogActions,
   DialogContent,
   DialogTitle,
   IconButton,
@@ -12,33 +13,33 @@ import {
   Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import UploadIcon from "@mui/icons-material/Upload";
-import { styled } from "@mui/material/styles";
+import { useMediaQuery } from "@mui/material";
+import FilePicker from "../../../FilePicker/FilePicker";
 
 const ModalWrapper = ({
   open,
   onClose,
   title,
   children,
-  dialogContentSx,
   image,
   src,
   ClosePreview,
   UploadChange,
   imageText,
+  btnText,
+
   ...props
 }) => {
-  const VisuallyHiddenInput = styled("input")({
-    clip: "rect(0 0 0 0)",
-    clipPath: "inset(50%)",
-    height: 1,
-    overflow: "hidden",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    whiteSpace: "nowrap",
-    width: 1,
-  });
+  const isSmallScreen = useMediaQuery("(max-width: 600px)");
+  const isMediumScreen = useMediaQuery(
+    "(min-width: 601px) and (max-width: 960px)"
+  );
+
+  const buttonSize = isSmallScreen
+    ? "small"
+    : isMediumScreen
+    ? "medium"
+    : "large";
 
   function BootstrapDialogTitle(props) {
     const { children, ...other } = props;
@@ -46,17 +47,26 @@ const ModalWrapper = ({
       <DialogTitle
         sx={{
           textAlign: "center",
-          padding: "10px 0",
-          position: "sticky",
-          top: 0,
         }}
         {...other}
       >
-        {children}
+        <Typography mx="20px" fontSize={{ xs: "16px", sm: "22px" }}>
+          {children}
+        </Typography>
         <IconButton
           aria-label="close"
           onClick={onClose}
-          sx={{ position: "absolute", left: 8, top: 12 }}
+          sx={{
+            position: "absolute",
+            left: {
+              xs: 15,
+              sm: 20,
+            },
+            top: {
+              xs: 18,
+              sm: 23,
+            },
+          }}
         >
           <CloseIcon />
         </IconButton>
@@ -69,65 +79,41 @@ const ModalWrapper = ({
       onClose={onClose}
       maxWidth="sm"
       fullWidth
-      sx={{
-        "& .MuiDialog-container": { "& .MuiPaper-root": { minWidth: "280px" } },
-      }}
       scroll="paper"
       {...props}
+      sx={{}}
+      PaperProps={{
+        style: {
+          borderRadius: 8,
+          padding: "10px 5px",
+        },
+      }}
     >
       <BootstrapDialogTitle onClose={onClose}>{title}</BootstrapDialogTitle>
 
-      <DialogContent sx={{ dialogContentSx }} dividers>
-        <Stack direction="column" gap={4}>
+      <DialogContent>
+        <Stack direction="column" gap={3} my={2}>
           {children}
         </Stack>
         {image && (
-          <Box>
-            <Typography m="10px 0" fontSize={15} fontWeight="550">
-              {imageText}
-            </Typography>
-            <Stack direction="row" gap={2}>
-              <Box>
-                {src ? (
-                  <Badge
-                    color="primary"
-                    badgeContent={
-                      <CloseIcon fontSize="10px" onClick={ClosePreview} />
-                    }
-                  >
-                    <Avatar src={src} variant="rounded" />
-                  </Badge>
-                ) : (
-                  <Avatar variant="rounded" />
-                )}
-              </Box>
-              <Button
-                component="label"
-                variant="contained"
-                startIcon={<UploadIcon />}
-                fullWidth
-                onChange={UploadChange}
-              >
-                Upload file
-                <VisuallyHiddenInput type="file" />
-              </Button>
-            </Stack>
-          </Box>
+          <FilePicker
+            imageText={imageText}
+            src={src}
+            UploadChange={UploadChange}
+            ClosePreview={ClosePreview}
+          />
         )}
       </DialogContent>
-      <Box
+      <DialogActions
         sx={{
           bgcolor: "white",
-          padding: "10px 20px",
-          position: "sticky",
-          bottom: 0,
-          zIndex: 2,
+          padding: "10px 23px ",
         }}
       >
-        <Button fullWidth variant="contained" size="large">
-          Sign
+        <Button fullWidth variant="contained" size={buttonSize}>
+          {btnText}
         </Button>
-      </Box>
+      </DialogActions>
     </Dialog>
   );
 };

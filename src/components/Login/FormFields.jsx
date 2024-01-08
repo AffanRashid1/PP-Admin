@@ -23,6 +23,8 @@ const FormFields = () => {
         <TextField
           label="Username/Email"
           fullWidth
+          required
+          type="email"
           color="secondary"
           style={{ margin: "10px 0" }}
           InputProps={{
@@ -37,6 +39,7 @@ const FormFields = () => {
           color="secondary"
           label="Password"
           fullWidth
+          required
           style={{ margin: "10px 0" }}
           type={showPassword ? "text" : "password"}
           InputProps={{
@@ -54,7 +57,13 @@ const FormFields = () => {
           }}
         />
         <Stack mt={5} direction="column" gap={2}>
-          <Button variant="contained" fullWidth color="primary" size="large">
+          <Button
+            variant="contained"
+            fullWidth
+            color="primary"
+            size="large"
+            type="submit"
+          >
             Login
           </Button>
 

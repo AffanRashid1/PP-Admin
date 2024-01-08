@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CustomModal from "../components/custom/Modal/CustomModal";
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import ModalWrapper from "../components/custom/ModalMui/ModalMui";
 
 const SchedulerModal = () => {
@@ -12,12 +12,14 @@ const SchedulerModal = () => {
 
   return (
     <>
-      <button onClick={() => setOpen(true)}>Show modal</button>
+      <Button variant="contained" onClick={() => setOpen(true)}>
+        Show modal
+      </Button>
 
       <ModalWrapper
         open={open}
         onClose={() => setOpen(false)}
-        title="Add Scheduler Details"
+        title="Add Scheduler Details and much more"
         image
         UploadChange={(e) => {
           setFile({
@@ -28,7 +30,10 @@ const SchedulerModal = () => {
         ClosePreview={() => setFile(null)}
         src={file?.imagePreview}
         imageText="Product Logo"
+        btnText="Done"
       >
+        <TextField label="Phone Number" color="secondary" />
+        <TextField label="Phone Number" color="secondary" />
         <TextField label="Phone Number" color="secondary" />
         <TextField label="Phone Number" color="secondary" />
       </ModalWrapper>
