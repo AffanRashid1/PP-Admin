@@ -5,10 +5,10 @@ const NumberInput = ({ label, onChange, value }) => {
   //   const onChange = (event) => {
   //     const inputValue = event.target.value;
 
-  //     if (inputValue.trim() === "") {
+  //     if (inputValue.trim() == "") {
   //       setError("Field cannot be empty");
   //     } else {
-  //       setError("");
+  //       setError(null);
   //     }
 
   //     setValue(inputValue);
